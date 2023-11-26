@@ -20,7 +20,7 @@ public class Emprunt {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Emprunt(Long id, User user, LocalDate startDate, LocalDate endDate) {
+    public Emprunt(User user, LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.user = user;
         this.startDate = startDate;
