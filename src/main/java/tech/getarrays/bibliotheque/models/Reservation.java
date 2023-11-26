@@ -19,6 +19,14 @@ public class Reservation {
 
     private boolean fulfilled;
 
+
+    public Reservation() {
+        // Constructeur par défaut sans arguments
+    }
+
+
+
+
     public Reservation(Long id, User user, Book book, boolean fulfilled) {
         this.id = id;
         this.user = user;
