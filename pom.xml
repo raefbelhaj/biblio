@@ -8,11 +8,13 @@
 		<version>3.1.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>tech.getaarays</groupId>
-	<artifactId>BibliothequeExpress</artifactId>
+
+	<groupId>tech.getarrays</groupId>
+	<artifactId>bibliotheque</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BibliothequeExpress</name>
-	<description>Projet de gestion de bibliothèque</description>
+	<name>bibliotheque</name>
+	<description>Demo project for Spring Boot</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
