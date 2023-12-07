@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.bibliotheque.models.Reservation;
 import tech.getarrays.bibliotheque.Repo.ReservationRepository;
+import tech.getarrays.bibliotheque.models.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,8 @@ public class ReservationService {
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
+
+
 
     public void deleteReservation(Long id) {
         reservationRepository.deleteById(id);

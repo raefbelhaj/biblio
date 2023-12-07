@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +15,10 @@ public class User {
     private String phoneNumber;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+
     private LibraryCard libraryCard;
+
 
     public User() {
         // Constructeur par défaut requis par JPA

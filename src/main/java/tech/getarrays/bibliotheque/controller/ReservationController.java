@@ -34,11 +34,13 @@ public class ReservationController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Reservation>> getAllReservations() {
         List<Reservation> reservations = reservationService.getAllReservations();
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {

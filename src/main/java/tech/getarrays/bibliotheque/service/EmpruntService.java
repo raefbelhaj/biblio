@@ -32,17 +32,16 @@ public class EmpruntService {
     }
 
     public Emprunt createEmprunt(Long userId, LocalDate startDate, LocalDate endDate) {
-        Optional<User> optionalUser = userRepository.findById(userId);
 
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Emprunt emprunt = new Emprunt(user, startDate, endDate);
+
+
+            Emprunt emprunt = new Emprunt(userId, startDate, endDate);
             return empruntRepository.save(emprunt);
         }
 
         // Handle user not found
-        return null;
-    }
+
+
 
     public Emprunt updateEmprunt(Long id, LocalDate startDate, LocalDate endDate) {
         Optional<Emprunt> optionalEmprunt = empruntRepository.findById(id);
@@ -63,6 +62,6 @@ public class EmpruntService {
     }
 
     public Optional<Emprunt> getEmpruntById(Long id) {
-        return null;
+        return empruntRepository.findById(id);
     }
 }

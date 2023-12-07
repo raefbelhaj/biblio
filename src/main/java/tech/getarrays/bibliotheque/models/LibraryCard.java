@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +14,11 @@ public class LibraryCard {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public LibraryCard(Long id, User user) {
-        this.id = id;
+    public LibraryCard() {
+    }
+
+    public LibraryCard( User user) {
+
         this.user = user;
     }
 

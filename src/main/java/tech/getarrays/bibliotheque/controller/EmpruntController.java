@@ -32,10 +32,13 @@ public class EmpruntController {
     @GetMapping("/{id}")
     public ResponseEntity<Emprunt> getEmpruntById(@PathVariable Long id) {
         Optional<Emprunt> emprunt = empruntService.getEmpruntById(id);
-
-        return emprunt.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (emprunt.isPresent()) {
+            return new ResponseEntity<>(emprunt.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
+
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Emprunt>> getEmpruntsByUserId(@PathVariable Long userId) {
@@ -55,10 +58,7 @@ public class EmpruntController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Emprunt> updateEmprunt(
-            @PathVariable Long id,
-            @RequestBody EmpruntRequest empruntRequest
-    ) {
+    public ResponseEntity<Emprunt> updateEmprunt(@PathVariable Long id, @RequestBody EmpruntRequest empruntRequest) {
         Emprunt emprunt = empruntService.updateEmprunt(
                 id,
                 empruntRequest.getStartDate(),
