@@ -3,6 +3,8 @@ package tech.getarrays.bibliotheque.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class User {
 
@@ -14,9 +16,13 @@ public class User {
     private String address;
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
+    private  Set<Emprunt> emprunts ;
 
+
+
+    @OneToOne(mappedBy = "user")
     private LibraryCard libraryCard;
 
 

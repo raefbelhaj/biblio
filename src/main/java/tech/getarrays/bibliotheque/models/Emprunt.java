@@ -11,14 +11,16 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
 
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Emprunt(Long userId , LocalDate startDate, LocalDate endDate) {
-        this.id = id;
-        this.userId = userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Emprunt(User user, LocalDate startDate, LocalDate endDate) {
+        this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
     }
