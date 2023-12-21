@@ -16,15 +16,6 @@ public class Book {
     private String author;
     private String isbn;
     private LocalDate publicationDate;
-
-    public int getNumberOfCopies() {
-        return NumberOfCopies;
-    }
-
-    public void setNumberOfCopies(int numberOfCopies) {
-        NumberOfCopies = numberOfCopies;
-    }
-
     private int NumberOfCopies;
 
     @ManyToOne
@@ -91,6 +82,8 @@ public class Book {
     public void setCategory(category category) {
         this.category = category;
     }
+    public int getNumberOfCopies() {return NumberOfCopies;}
+    public void setNumberOfCopies(int numberOfCopies) {NumberOfCopies = numberOfCopies;}
 
     @Override
     public String toString() {
