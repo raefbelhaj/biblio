@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.bibliotheque.models.Emprunt;
+import tech.getarrays.bibliotheque.models.User;
 import tech.getarrays.bibliotheque.request.EmpruntRequest;
 import tech.getarrays.bibliotheque.service.EmpruntService;
 
@@ -24,56 +25,31 @@ public class EmpruntController {
         this.empruntService = empruntService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Emprunt>> getAllEmprunts() {
-        List<Emprunt> emprunts = empruntService.getAllEmprunts();
-        return new ResponseEntity<>(emprunts, HttpStatus.OK);
+    @PostMapping("/create")
+    public ResponseEntity<String> createEmprunt(@RequestBody EmpruntRequest empruntRequest) {
+        User user = empruntRequest.getUser();
+        LocalDate startDate = empruntRequest.getStartDate();
+        LocalDate endDate = empruntRequest.getEndDate();
+
+        empruntService.createEmprunt(user, startDate, endDate);
+
+        return new ResponseEntity<>("Emprunt créé avec succès", HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Emprunt> getEmpruntById(@PathVariable Long id) {
-        Optional<Emprunt> emprunt = empruntService.getEmpruntById(id);
+    @GetMapping("/{empruntId}")
+    public ResponseEntity<Emprunt> getEmpruntById(@PathVariable Long empruntId) {
+        Optional<Emprunt> emprunt = empruntService.getEmpruntById(empruntId);
 
         return emprunt.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Emprunt>> getEmpruntsByUserId(@PathVariable Long userId) {
-        List<Emprunt> emprunts = empruntService.getEmpruntsByUserId(userId);
+    @GetMapping("/all")
+    public ResponseEntity<List<Emprunt>> getAllEmprunts() {
+        List<Emprunt> emprunts = empruntService.getAllEmprunts();
         return new ResponseEntity<>(emprunts, HttpStatus.OK);
     }
 
-    @PostMapping("/createEmprunt")
-    public ResponseEntity<Emprunt> createEmprunt(@RequestBody EmpruntRequest empruntRequest) {
-        Emprunt emprunt = empruntService.createEmprunt(
-                empruntRequest.getUserId(),
-                empruntRequest.getStartDate(),
-                empruntRequest.getEndDate()
-        );
+    // Ajoutez d'autres méthodes du contrôleur au besoin
 
-        return new ResponseEntity<>(emprunt, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Emprunt> updateEmprunt(
-            @PathVariable Long id,
-            @RequestBody EmpruntRequest empruntRequest
-    ) {
-        Emprunt emprunt = empruntService.updateEmprunt(
-                id,
-                empruntRequest.getStartDate(),
-                empruntRequest.getEndDate()
-        );
-
-        return emprunt != null ?
-                new ResponseEntity<>(emprunt, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmprunt(@PathVariable Long id) {
-        empruntService.deleteEmprunt(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

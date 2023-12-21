@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jdk.jfr.Category;
 
@@ -18,8 +19,11 @@ public class Book {
     private LocalDate publicationDate;
     private int NumberOfCopies;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "category_id")
+
+
+
     private category category;
 
     public Book() {

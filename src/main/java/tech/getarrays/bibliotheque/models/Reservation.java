@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity

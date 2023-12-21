@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -42,6 +42,8 @@ public class UserController {
 
     @PutMapping("/{userId}")
     public ResponseEntity<Void> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
+        System.out.println("testtt"+userId+updatedUser);
+
         userService.updateUser(userId, updatedUser);
         return new ResponseEntity<>(HttpStatus.OK);
     }

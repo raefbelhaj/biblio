@@ -11,20 +11,21 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
 
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public Emprunt(User user, LocalDate startDate, LocalDate endDate) {
-        this.id = id;
         this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+    public Emprunt(){
+
     }
 
     public Long getId() {
@@ -35,13 +36,7 @@ public class Emprunt {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public LocalDate getStartDate() {
         return startDate;

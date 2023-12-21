@@ -30,19 +30,42 @@ public class UserService {
         userRepo.save(user);
     }
 
-    public void updateUser(Long userId, User updatedUser) {
+    public User updateUser(Long userId, User updatedUser) {
         Optional<User> existingUserOptional = userRepo.findById(userId);
+        System.out.println("useradd"+userId);
+
         if (existingUserOptional.isPresent()) {
             User existingUser = existingUserOptional.get();
+
+            // Update the fields of the existing user with the values from updatedUser
             existingUser.setName(updatedUser.getName());
             existingUser.setAddress(updatedUser.getAddress());
             existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
             existingUser.setLibraryCard(updatedUser.getLibraryCard());
-            userRepo.save(existingUser);
+
+            // Save the updated user to the repository
+            System.out.println("adddd");
+             userRepo.save(existingUser);
+             return existingUser;
+        } else {
+            System.out.println("errrrrrr");           // Handle the case where the user with the given id is not found
+            // You may choose to throw an exception or handle it as needed
+            return null; // or throw an exception
         }
     }
+
 
     public void deleteUser(Long userId) {
         userRepo.deleteById(userId);
     }
+
+
+
+
+
+
 }
+
+
+
+
