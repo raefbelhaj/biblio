@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-
+@AllArgsConstructor
 @Service
 public class NotificationService {
 

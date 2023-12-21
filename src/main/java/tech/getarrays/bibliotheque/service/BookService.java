@@ -1,6 +1,7 @@
 package tech.getarrays.bibliotheque.service;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.bibliotheque.exception.BookNotFoundException;
@@ -9,16 +10,12 @@ import tech.getarrays.bibliotheque.Repo.BookRepo;
 
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class BookService {
 
     private final BookRepo bookRepo;
 
-    @Autowired
-    public BookService(BookRepo bookRepo) {
-        this.bookRepo = bookRepo;
-    }
 
     public List<Book> getAllBooks() {
         return bookRepo.findAll();

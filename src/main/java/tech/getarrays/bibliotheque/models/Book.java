@@ -1,10 +1,17 @@
 package tech.getarrays.bibliotheque.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jdk.jfr.Category;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 public class Book {
@@ -22,72 +29,8 @@ public class Book {
     @OneToOne
     @JoinColumn(name = "category_id")
 
-
-
     private category category;
 
-    public Book() {
-    }
-
-    public Book(Long id, String title, String author, String isbn, LocalDate publicationDate, category category) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.publicationDate = publicationDate;
-        this.NumberOfCopies = NumberOfCopies;
-        this.category = category;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public LocalDate getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    public category getCategory() {
-        return category;
-    }
-
-    public void setCategory(category category) {
-        this.category = category;
-    }
-    public int getNumberOfCopies() {return NumberOfCopies;}
-    public void setNumberOfCopies(int numberOfCopies) {NumberOfCopies = numberOfCopies;}
 
     @Override
     public String toString() {

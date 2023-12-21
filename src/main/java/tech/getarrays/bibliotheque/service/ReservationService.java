@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.bibliotheque.models.Reservation;
@@ -8,16 +9,12 @@ import tech.getarrays.bibliotheque.models.User;
 
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
-    @Autowired
-    public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
 
     public Reservation saveReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
