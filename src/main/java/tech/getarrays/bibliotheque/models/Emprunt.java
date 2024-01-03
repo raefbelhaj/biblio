@@ -19,6 +19,11 @@ public class Emprunt {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+
+    @Enumerated(EnumType.STRING)
+    private Statistique.StatutEmprunt statutEmprunt;
+
+
     public Emprunt(User user, LocalDate startDate, LocalDate endDate) {
         this.user = user;
         this.startDate = startDate;

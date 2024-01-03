@@ -1,0 +1,53 @@
+<!-- src/main/resources/templates/book-form.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau Livre</title>
+</head>
+<body>
+
+<header>
+    <h1>Add Book </h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/books}">Retour à la Liste des Livres</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="book-form">
+    <form action="/saveBook" method="post" th:object="${book}">
+        <!-- Hidden input for ID if editing an existing book -->
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="title">Titre:</label>
+        <input type="text" id="title" th:field="*{title}" required />
+
+        <label for="author">Auteur:</label>
+        <input type="text" id="author" th:field="*{author}" required />
+
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" th:field="*{isbn}" required />
+
+        <label for="publicationDate">Date de Publication:</label>
+        <input type="date" id="publicationDate" th:field="*{publicationDate}" required />
+
+        <!-- Assuming you have a list of categories to choose from -->
+        <label for="category">Catégorie:</label>
+        <select id="category" th:field="*{category}" required>
+            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat.name}"></option>
+        </select>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Bibliothèque eXpress. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

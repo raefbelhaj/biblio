@@ -18,6 +18,9 @@ public class Reservation {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @Enumerated(EnumType.STRING)
+    private Statistique.StatutReservation statutReservation;
+
     private boolean fulfilled;
 
 

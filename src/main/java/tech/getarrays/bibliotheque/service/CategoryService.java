@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Service
-@Transactional
+
 public class CategoryService {
 
     @Autowired
