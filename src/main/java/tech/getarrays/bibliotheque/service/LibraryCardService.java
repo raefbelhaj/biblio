@@ -1,5 +1,6 @@
 package tech.getarrays.bibliotheque.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.bibliotheque.Repo.LibraryCardRepository;
@@ -8,15 +9,13 @@ import tech.getarrays.bibliotheque.models.LibraryCard;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class LibraryCardService {
 
     private final LibraryCardRepository libraryCardRepository;
 
-    @Autowired
-    public LibraryCardService(LibraryCardRepository libraryCardRepository) {
-        this.libraryCardRepository = libraryCardRepository;
-    }
+
 
     public List<LibraryCard> getAllLibraryCards() {
         return libraryCardRepository.findAll();

@@ -1,8 +1,9 @@
 package tech.getarrays.bibliotheque.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tech.getarrays.bibliotheque.exception.BookNotFoundException;
 import tech.getarrays.bibliotheque.models.Book;
 import tech.getarrays.bibliotheque.Repo.BookRepo;
 
@@ -14,10 +15,10 @@ public class BookService {
 
     private final BookRepo bookRepo;
 
-    @Autowired
     public BookService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
     }
+
 
     public List<Book> getAllBooks() {
         return bookRepo.findAll();
@@ -32,6 +33,7 @@ public class BookService {
     }
 
     public void updateBook(Long bookId, Book updatedBook) {
+
         Optional<Book> existingBookOptional = bookRepo.findById(bookId);
         if (existingBookOptional.isPresent()) {
             Book existingBook = existingBookOptional.get();
@@ -46,5 +48,21 @@ public class BookService {
 
     public void deleteBook(Long bookId) {
         bookRepo.deleteById(bookId);
+    }
+
+
+
+    public void addCopies(Long bookId, int numberOfCopies) {
+        Optional<Book> optionalBook = bookRepo.findById(bookId);
+
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            int currentCopies = book.getNumberOfCopies();
+            book.setNumberOfCopies(currentCopies + numberOfCopies);
+            bookRepo.save(book);
+        } else {
+            // Gérer le cas où le livre avec l'ID spécifié n'est pas trouvé
+            throw new BookNotFoundException("Livre introuvable avec l'ID : " + bookId);
+        }
     }
 }

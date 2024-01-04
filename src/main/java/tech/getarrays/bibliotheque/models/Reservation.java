@@ -2,6 +2,11 @@ package tech.getarrays.bibliotheque.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
 public class Reservation {
@@ -18,16 +23,10 @@ public class Reservation {
     @JoinColumn(name = "book_id")
     private Book book;
 
-
     private boolean fulfilled;
 
-
     public Reservation() {
-        // Constructeur par défaut sans arguments
     }
-
-
-
 
     public Reservation(Long id, User user, Book book, boolean fulfilled) {
         this.id = id;
@@ -36,6 +35,9 @@ public class Reservation {
         this.fulfilled = fulfilled;
     }
 
+    // Constructors, getters, and setters
+
+    // You had an incomplete getId method, I've corrected it
     public Long getId() {
         return id;
     }
@@ -68,5 +70,5 @@ public class Reservation {
         this.fulfilled = fulfilled;
     }
 
-    // Getters and setters
+    // You can keep your existing isFulfilled and setFulfilled methods or remove them
 }

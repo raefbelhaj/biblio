@@ -1,54 +1,110 @@
 package tech.getarrays.bibliotheque.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.bibliotheque.models.Book;
 import tech.getarrays.bibliotheque.service.BookService;
 
+
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/books")
+
+@Controller
+@RequestMapping("/books")
 public class BookController {
 
+
     private final BookService bookService;
+
 
     @Autowired
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
+
     @GetMapping("/all")
-    public ResponseEntity<List<Book>> getAllBooks() {
+    public String getAllBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
-        return new ResponseEntity<>(books, HttpStatus.OK);
+        model.addAttribute("books", books);
+        return "book/all";
     }
+
 
     @GetMapping("/{bookId}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long bookId) {
+    public String getBookById(@PathVariable Long bookId, Model model) {
         Optional<Book> book = bookService.getBookById(bookId);
-        return book.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        book.ifPresent(value -> model.addAttribute("book", value));
+        return book.map(value -> "book/details").orElse("book/not-found");
     }
 
-    @PostMapping
-    public ResponseEntity<Void> addBook(@RequestBody Book book) {
+
+    @GetMapping("/add")
+    public String getAddBookForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "book/add";
+    }
+
+
+    @PostMapping("/add")
+    public String addBook(@ModelAttribute Book book) {
         bookService.addBook(book);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return "redirect:/books/all";
     }
 
-    @PutMapping("/{bookId}")
-    public ResponseEntity<Void> updateBook(@PathVariable Long bookId, @RequestBody Book updatedBook) {
+
+    @GetMapping("/update/{bookId}")
+    public String getUpdateBookForm(@PathVariable Long bookId, Model model) {
+        Optional<Book> book = bookService.getBookById(bookId);
+        book.ifPresent(value -> model.addAttribute("book", value));
+        return book.map(value -> "book/update").orElse("book/not-found");
+    }
+
+
+    @PostMapping("/update/{bookId}")
+    public String updateBook(@PathVariable Long bookId, @ModelAttribute Book updatedBook) {
         bookService.updateBook(bookId, updatedBook);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return "redirect:/books/all";
     }
 
-    @DeleteMapping("/{bookId}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long bookId) {
+
+    @GetMapping("/delete/{bookId}")
+    public String deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return "redirect:/books/all";
+    }
+
+
+    @PostMapping("/addCopies/{bookId}")
+    public String addCopies(
+            @PathVariable Long bookId,
+            @RequestParam int numberOfCopies) {
+        bookService.addCopies(bookId, numberOfCopies);
+        return "redirect:/books/all";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js}"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>User Details</h2>
+    <dl class="row">
+        <dt class="col-sm-3">ID:</dt>
+        <dd class="col-sm-9" th:text="${user.id}"></dd>
+
+        <dt class="col-sm-3">Name:</dt>
+        <dd class="col-sm-9" th:text="${user.name}"></dd>
+
+        <dt class="col-sm-3">Address:</dt>
+        <dd class="col-sm-9" th:text="${user.address}"></dd>
+
+        <dt class="col-sm-3">Phone Number:</dt>
+        <dd class="col-sm-9" th:text="${user.phoneNumber}"></dd>
+    </dl>
+    <!--botton edit-->
+    <div class="container mt-5">
+        <!-- ... Autres détails ... -->
+        <a th:href="@{/users/edit/{userId}(userId=${user.id})}" class="btn btn-warning">Edit</a>
+    </div>
+    <!-- Ajouter un bouton de suppression avec la confirmation -->
+    <form th:action="@{/users/delete/{userId}(userId=${user.id})}" method="post" id="deleteForm">
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </form>
+    <a th:href="@{/users/all}" class="btn btn-primary">Back to List</a>
+</div>
+
+<!-- Ajouter le script JavaScript pour la confirmation de suppression -->
+<script th:inline="javascript">
+    function confirmDelete() {
+        if (confirm('Are you sure you want to delete this user?')) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Add your custom JS here if needed -->
+
+</body>
+</html>

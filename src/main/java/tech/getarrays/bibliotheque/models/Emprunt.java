@@ -1,7 +1,13 @@
 package tech.getarrays.bibliotheque.models;
 
 import jakarta.persistence.*;
+
+
+
+
+
 import java.time.LocalDate;
+
 
 @Entity
 public class Emprunt {
@@ -54,6 +60,10 @@ public class Emprunt {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    public Emprunt(User user, LocalDate startDate, LocalDate endDate) {
+    }
+
 
     public User getUser() {
         return user;

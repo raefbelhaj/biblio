@@ -1,15 +1,16 @@
 package tech.getarrays.bibliotheque.models;
 
-import
-
-        com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jdk.jfr.Category;
+
 
 import java.time.LocalDate;
 
+
+
 @Entity
 public class Book {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,21 +20,22 @@ public class Book {
     private String author;
     private String isbn;
     private LocalDate publicationDate;
+    private int NumberOfCopies;
 
     @OneToOne
     @JoinColumn(name = "category_id")
 
     private category category;
-
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String isbn, LocalDate publicationDate, category category) {
+    public Book(Long id, String title, String author, String isbn, LocalDate publicationDate, int numberOfCopies, tech.getarrays.bibliotheque.models.category category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.publicationDate = publicationDate;
+        NumberOfCopies = numberOfCopies;
         this.category = category;
     }
 
@@ -77,11 +79,19 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public category getCategory() {
+    public int getNumberOfCopies() {
+        return NumberOfCopies;
+    }
+
+    public void setNumberOfCopies(int numberOfCopies) {
+        NumberOfCopies = numberOfCopies;
+    }
+
+    public tech.getarrays.bibliotheque.models.category getCategory() {
         return category;
     }
 
-    public void setCategory(category category) {
+    public void setCategory(tech.getarrays.bibliotheque.models.category category) {
         this.category = category;
     }
 

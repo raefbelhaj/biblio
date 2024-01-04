@@ -2,7 +2,15 @@ package tech.getarrays.bibliotheque.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class LibraryCard {
 
@@ -14,31 +22,7 @@ public class LibraryCard {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public LibraryCard() {
-    }
 
-    public LibraryCard( User user) {
-
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    // Add any additional fields as needed
 
     // Getters and setters
 }

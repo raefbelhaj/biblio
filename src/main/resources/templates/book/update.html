@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add additional CSS styles if needed -->
+</head>
+<body class="container mt-4">
+
+<h1 class="mb-4">Update Book</h1>
+
+<form th:action="@{/books/update/{bookId}(bookId=${book.id})}" th:object="${book}" method="post">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" th:field="*{title}" required/>
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <input type="text" class="form-control" id="author" th:field="*{author}" required/>
+    </div>
+    <!-- Add other book attributes as needed -->
+    <button type="submit" class="btn btn-primary">Update Book</button>
+</form>
+
+<a th:href="@{/books/all}" class="btn btn-secondary mt-3">Back to All Books</a>
+
+<!-- Bootstrap JS and other scripts if needed -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

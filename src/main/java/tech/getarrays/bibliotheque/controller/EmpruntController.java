@@ -21,6 +21,7 @@ public class EmpruntController {
 
     @Autowired
     public EmpruntController(EmpruntService empruntService) {
+
         this.empruntService = empruntService;
     }
 
