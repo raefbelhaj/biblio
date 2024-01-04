@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,43 +12,48 @@
     <h1>Bibliothèque eXpress</h1>
     <nav>
         <ul>
-            <li><a th:href="@{/books}">Book</a></li>
+            <li><a th:href="@{/books}">Books</a></li>
             <li><a th:href="@{/users}">Utilisateurs</a></li>
             <li><a th:href="@{/loans}">Emprunts</a></li>
             <li><a th:href="@{/categories}">Catégories</a></li>
-            <!-- Ajoutez d'autres liens selon les besoins -->
+            <li><a th:href="@{/borrowing-statistics}">Statistics</a></li>
+            <li><a th:href="@{/notifications/send-custom}">SendCustomNotification</a></li>
+
+
+            <!-- Add more links as needed -->
         </ul>
     </nav>
 </header>
 
 <section id="books">
-    <!-- Utilisez Thymeleaf pour afficher la liste des livres -->
-    <!-- Utilisez les liens vers les pages individuelles des livres -->
+    <h2>Books Section</h2>
+    <!-- Utilize Thymeleaf to display the list of books and links to individual book pages -->
 </section>
 
 <section id="users">
-    <!-- Utilisez Thymeleaf pour afficher la liste des utilisateurs -->
-    <!-- Utilisez les liens vers les pages individuelles des utilisateurs -->
+    <h2>Users Section</h2>
+    <!-- Utilize Thymeleaf to display the list of users and links to individual user pages -->
 </section>
 
 <section id="loans">
-    <!-- Utilisez Thymeleaf pour afficher la liste des emprunts -->
-    <!-- Utilisez les liens vers les pages individuelles des emprunts -->
+    <h2>Loans Section</h2>
+    <!-- Utilize Thymeleaf to display the list of loans and links to individual loan pages -->
 </section>
 
 <section id="categories">
-    <!-- Utilisez Thymeleaf pour afficher la liste des catégories -->
-    <!-- Utilisez les liens vers les pages individuelles des catégories -->
+    <h2>Categories Section</h2>
+    <!-- Utilize Thymeleaf to display the list of categories and links to individual category pages -->
 </section>
 
-<!-- Ajoutez d'autres sections selon les besoins -->
+<section id="borrowing-statistics">
+    <h2>Borrowing Statistics Section</h2>
+    <!-- Utilize Thymeleaf to display borrowing statistics -->
+    <!-- You may need to loop through a list of statistics if available -->
+</section>
 
 <footer>
     <p>&copy; 2024 Bibliothèque eXpress. Tous droits réservés.</p>
 </footer>
-
-</body>
-</html>
 
 </body>
 </html>

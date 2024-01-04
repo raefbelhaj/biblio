@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Send Email</title>
+    <link rel="stylesheet" th:href="@{/css/notification.css}" />
+
+
+    <!-- Include any additional styles or scripts if needed -->
+</head>
+<body>
+<h1>Send Email</h1>
+
+<!-- Display notifications or errors -->
+<p th:text="${message}" style="color: green;"></p>
+
+<!-- Form to send a custom email -->
+<form th:action="@{/notifications/send-custom}" th:method="post" th:object="${notificationRequest}">
+    <label for="to">To:</label>
+    <input type="email" id="to" name="to" th:field="*{to}" required/><br/>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" th:field="*{subject}" required/><br/>
+
+    <label for="body">Body:</label>
+    <textarea id="body" name="body" th:field="*{body}" required></textarea><br/>
+
+    <button type="submit">Send Email</button>
+</form>
+
+<!-- Form to send a test email -->
+<form th:action="@{/notifications/send}" th:method="get">
+    <button type="submit">Send Test Email</button>
+</form>
+
+<!-- Include any additional content or scripts if needed -->
+</body>
+</html>

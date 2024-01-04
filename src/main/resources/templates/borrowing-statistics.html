@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/borrowing-statistics.css}" />
+    <title>Borrowing Statistics</title>
+</head>
+<body>
+<h1>Borrowing Statistics</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Total Borrowings</th>
+        <th>Total Books</th>
+        <th>Total Members</th>
+        <th>Total Reservations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${borrowingStatistics.id}"></td>
+        <td th:text="${borrowingStatistics.totalBorrowings}"></td>
+        <td th:text="${borrowingStatistics.totalBooks}"></td>
+        <td th:text="${borrowingStatistics.totalMembers}"></td>
+        <td th:text="${borrowingStatistics.totalReservation}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
