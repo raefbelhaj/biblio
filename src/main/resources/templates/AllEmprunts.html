@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Emprunts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .emprunt {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .emprunt span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .emprunt p {
+            margin: 10px 0;
+        }
+
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+
+<h1>All Emprunts</h1>
+
+<!-- Display any validation errors if needed -->
+
+<!-- Iterate over the list of emprunts and display information -->
+<div th:each="emprunt : ${emprunts}" class="emprunt">
+    <p>Emprunt ID: <span th:text="${emprunt.id}"></span></p>
+
+    <!-- Add a null check for user before accessing its properties -->
+    <p th:if="${emprunt.user != null}">User ID: <span th:text="${emprunt.user.id}"></span></p>
+
+    <!-- Add a null check for book before accessing its properties -->
+    <p th:if="${emprunt.book != null}">Book ID: <span th:text="${emprunt.book.id}"></span></p>
+
+    <p>Start Date: <span th:text="${emprunt.startDate}"></span></p>
+    <p>End Date: <span th:text="${emprunt.endDate}"></span></p>
+</div>
+
+<!-- Include any additional content or scripts if needed -->
+</body>
+</html>

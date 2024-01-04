@@ -1,5 +1,7 @@
 package tech.getarrays.bibliotheque.request;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import tech.getarrays.bibliotheque.models.User;
 
 import java.time.LocalDate;
@@ -10,7 +12,12 @@ public class EmpruntRequest {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    // Constructeurs, getters, setters
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public EmpruntRequest() {
+    }
 
     public Long getUserId() {
         return userId;

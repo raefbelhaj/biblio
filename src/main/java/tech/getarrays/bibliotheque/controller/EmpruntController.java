@@ -1,20 +1,20 @@
 package tech.getarrays.bibliotheque.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tech.getarrays.bibliotheque.models.Book;
 import tech.getarrays.bibliotheque.models.Emprunt;
 import tech.getarrays.bibliotheque.models.User;
-import tech.getarrays.bibliotheque.request.EmpruntRequest;
 import tech.getarrays.bibliotheque.service.EmpruntService;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/emprunts")
+@Controller
+@RequestMapping("/emprunts")
 public class EmpruntController {
 
     private final EmpruntService empruntService;
@@ -25,30 +25,47 @@ public class EmpruntController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEmprunt(@RequestBody EmpruntRequest empruntRequest) {
-        User user = empruntRequest.getUser();
-        LocalDate startDate = empruntRequest.getStartDate();
-        LocalDate endDate = empruntRequest.getEndDate();
+    public String createEmprunt(@ModelAttribute Emprunt emprunt, Model model) {
+        Book book = emprunt.getBook();
+        User user = emprunt.getUser();
+        LocalDate startDate = emprunt.getStartDate();
+        LocalDate endDate = emprunt.getEndDate();
 
-        empruntService.createEmprunt(user, startDate, endDate);
+        empruntService.createEmprunt(user, startDate, endDate, book);
 
-        return new ResponseEntity<>("Emprunt créé avec succès", HttpStatus.CREATED);
+        model.addAttribute("message", "Emprunt créé avec succès");
+        return "createEmprunt";
+    }
+
+    @GetMapping("/create")
+    public String showCreateEmpruntForm(Model model) {
+        model.addAttribute("emprunt", new Emprunt()); // Change to "emprunt" instead of "empruntRequest"
+        return "createEmprunt"; // Provide the name of your Thymeleaf template for the form
     }
 
     @GetMapping("/{empruntId}")
-    public ResponseEntity<Emprunt> getEmpruntById(@PathVariable Long empruntId) {
+    public String getEmpruntById(@PathVariable Long empruntId, Model model) {
         Optional<Emprunt> emprunt = empruntService.getEmpruntById(empruntId);
 
-        return emprunt.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        emprunt.ifPresent(value -> model.addAttribute("emprunt", value));
+        return "emprunt"; // Provide the name of your Thymeleaf template
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Emprunt>> getAllEmprunts() {
+    public String getAllEmprunts(Model model) {
         List<Emprunt> emprunts = empruntService.getAllEmprunts();
-        return new ResponseEntity<>(emprunts, HttpStatus.OK);
+        model.addAttribute("emprunts", emprunts);
+        return "empruntList"; // Provide the name of your Thymeleaf template for listing
     }
 
-    // Ajoutez d'autres méthodes du contrôleur au besoin
+    // ... (existing code)
+
+    @GetMapping("/AllEmprunts")
+    public String showFrontPage(Model model) {
+        List<Emprunt> emprunts = empruntService.getAllEmprunts();
+        model.addAttribute("emprunts", emprunts);
+        return "AllEmprunts"; // Provide the name of your Thymeleaf template for the front page
+    }
+
 
 }

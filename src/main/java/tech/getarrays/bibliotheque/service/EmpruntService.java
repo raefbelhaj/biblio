@@ -2,6 +2,7 @@ package tech.getarrays.bibliotheque.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.getarrays.bibliotheque.models.Book;
 import tech.getarrays.bibliotheque.models.Emprunt;
 
 import tech.getarrays.bibliotheque.Repo.EmpruntRepository;
@@ -21,8 +22,8 @@ public class EmpruntService {
         this.empruntRepository = empruntRepository;
     }
 
-    public void createEmprunt(User user, LocalDate startDate, LocalDate endDate) {
-        Emprunt emprunt = new Emprunt(user, startDate, endDate);
+    public void createEmprunt(User user, LocalDate startDate, LocalDate endDate, Book book) {
+        Emprunt emprunt = new Emprunt(user, startDate, endDate, book);
         empruntRepository.save(emprunt);
     }
 
