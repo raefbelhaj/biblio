@@ -173,5 +173,7 @@ public class ReservationController {
         // Redirect to the reservation list page after deleting a reservation.
         return "redirect:/reservations/all";
     }
+
+
 }
 
